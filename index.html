@@ -2,11 +2,40 @@
 <html>
 <head>
   <title>Plant generator</title>
-  <script src="js.js"></script>
+  <link rel="stylesheet" type="text/css" href="css.css">
 </head>
 <body>
-  <div id="plantInfo">
+  <div id="wrapper">
+    <button onclick="genPlant()">Generate</button>
+    <div id="plantInfo">
+      <div v-for="plant in plants" class="plant">
+        <p>The plant is {{plant.eating}}.</p>
+        <p>Its uses are</p>
+        <div class="trait-tray">
+          <div v-for="trait in plant.traits" class="trait">
+            {{trait.traitType}}
+            <ul>
+              <li v-if="trait.plantPart != undefined">Plant part: {{trait.plantPart}}</li>
+              <li v-if="trait.flavour != undefined">Flavour: {{trait.flavour}}</li>
+              <li v-if="trait.prep != undefined">Prep: {{trait.prep}}</li>
+              <li v-if="trait.severity != undefined">Severity: {{trait.severity}}</li>
+              <li v-if="trait.method != undefined">Method: {{trait.method}}</li>
+              <li v-if="trait.dyeColour != undefined">Dye Colour: {{trait.dyeColour}}</li>
+              <li v-if="trait.cosmeticForm != undefined">Form: {{trait.cosmeticForm}}</li>
+              <li v-if="trait.cosmeticUse != undefined">Use: {{trait.cosmeticUse}}</li>
+              <li v-if="trait.medicinalUse != undefined">Medicinal Use: {{trait.medicinalUse}}</li>
+              <li v-if="trait.religiousUse != undefined">Religious Use: {{trait.religiousUse}}</li>
+              <li v-if="trait.textileGrade != undefined">Textile Grade: {{trait.textileGrade}}</li>
+            </ul>
+          </div>
+        </div>
+        <br clear="both">
+      </div>
+    </div>
+    <br clear="both">
   </div>
-  <button onclick="genPlant()">Generate</button>
+  <script src="vue.js"></script>
+  <script src="vueSetup.js"></script>
+  <script src="js.js"></script>
 </body>
 </html>
