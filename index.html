@@ -6,35 +6,111 @@
 </head>
 <body>
   <div id="wrapper">
+    <h1>Plant generator</h1>
+    <!-- <div id="optionsPanel">
+      <div class="col">
+        Plants should have minimum
+        <input type="number"> traits and maximum
+        <input type="number"> traits and
+      </div>
+      <div class="col">
+        Show me plants that <b>might</b> contain
+        <div>
+          <span v-for="util in optionTypes.utilityTypes">
+            <input type="checkbox" value="" name="">{{util}}<br>
+          </span>
+        </div>
+      </div>
+      <div class="col">
+        Show me plants that <b>definitely</b> contain
+        <div>
+          <span v-for="util in optionTypes.utilityTypes">
+            <input type="checkbox" value="" name="">{{util}}<br>
+          </span>
+        </div>
+      </div>
+    </div> -->
     <button onclick="genPlant()">Generate</button>
-    <div id="plantInfo">
-      <div v-for="plant in plants" class="plant">
-        <p>The plant is {{plant.eating}}.</p>
-        <p>Its uses are</p>
-        <div class="trait-tray">
-          <div v-for="trait in plant.traits" class="trait">
-            {{trait.traitType}}
+    <!-- <div class="plant-card">
+      <p class="plant-name">The three pointed trumpet</p>
+      <div class="plant-description">
+        <div class="col">
+          <div class="plant-col-title">Classification</div>
+          <p>Type: Herb</p>
+          <p>Rarity: Common</p>
+          <p>Habitat: Grasslands</p>
+          <p>Appearance:</p>
+          <p>
+            This plant has [small [purple] flowers] that [emit a [sweet] smell]. Its [green] leaves are [oval shaped], [arranged pinnately on a rosette].
+          </p>
+        </div>
+        <div class="col">
+          <div class="plant-col-title">Plant Uses</div>
+          <div class="utility-card">
+            <p class="utility-title">The <span class="clr-flower">[flowers]</span> are <span class="clr-poison">[poisonous]</span>.</p>
+            <p>When [ingested], it has the following effects:</p>
             <ul>
-              <li v-if="trait.plantPart != undefined">Plant part: {{trait.plantPart}}</li>
-              <li v-if="trait.flavour != undefined">Flavour: {{trait.flavour}}</li>
-              <li v-if="trait.prep != undefined">Prep: {{trait.prep}}</li>
-              <li v-if="trait.severity != undefined">Severity: {{trait.severity}}</li>
-              <li v-if="trait.method != undefined">Method: {{trait.method}}</li>
-              <li v-if="trait.dyeColour != undefined">Dye Colour: {{trait.dyeColour}}</li>
-              <li v-if="trait.cosmeticForm != undefined">Form: {{trait.cosmeticForm}}</li>
-              <li v-if="trait.cosmeticUse != undefined">Use: {{trait.cosmeticUse}}</li>
-              <li v-if="trait.medicinalUse != undefined">Medicinal Use: {{trait.medicinalUse}}</li>
-              <li v-if="trait.religiousUse != undefined">Religious Use: {{trait.religiousUse}}</li>
-              <li v-if="trait.textileGrade != undefined">Textile Grade: {{trait.textileGrade}}</li>
+              <li>It has a bitter taste.</li>
+              <li>It can cause organ failure in large quantities</li>
             </ul>
           </div>
+          <div class="utility-card">
+            <p class="utility-title">The <span class="clr-flower">[flowers]</span> are <span class="clr-cosmetic">[a cosmetic product]</span>.</p>
+            <p>When [powdered], it can be used as blush.</p>
+          </div>
+          <div class="utility-card">
+            <p class="utility-title">The <span class="clr-flower">[leaves]</span> are <span class="clr-medicine">[medicinal]</span>.</p>
+            <p>It can be used as a [paste] to [encourage vomiting]</p>
+          </div>
         </div>
-        <br clear="both">
+      </div>
+    </div> -->
+
+    <div id="plantInfo">
+      <div v-for="plant in plants" class="plant">
+        <div class="plant-card">
+          <p class="plant-name">Plant name</p>
+          <div class="plant-description">
+            <div class="col">
+              <div class="plant-col-title">Classification</div>
+              <p>Type: {{plant.class}}</p>
+              <p>Rarity: {{plant.rarity}}</p>
+              <p>Habitat: {{plant.habitat}}</p>
+              <p>Appearance:</p>
+              <p>
+                This plant has {{plant.appearance.flowers}} flowers that {{plant.appearance.flowerAction}}. Its {{plant.appearance.leafColour}} leaves are {{plant.appearance.leaves}}.
+              </p>
+            </div>
+            <div class="col">
+              <div class="plant-col-title">Plant Uses</div>
+              <div class="utility-card"  v-for="trait in plant.traits">
+                <p class="utility-title">
+                  The
+                  <span v-bind:class="colourOfPlantPart(trait.plantPart)">{{trait.plantPart}}</span>
+                  are
+                  <span v-bind:class="colourOfPlantUse(trait.type)">{{trait.typeAdjective}}</span>.
+                </p>
+                <p>
+                  <span v-if="trait.type == 'cooking'">It has a {{trait.flavour}} taste when {{trait.prepMethod}}, and can be used for {{trait.typeUse}}.</span>
+                  <span v-else-if="trait.type == 'textiles'">It is a {{trait.textileGrade}} material and produces {{trait.textileAdjective}} {{trait.textileItems}}.</span>
+                  <span v-else-if="trait.type == 'dyes'">It produces a {{trait.dyeColour}} colour.</span>
+                  <span v-else-if="trait.type == 'religion'">It is used {{trait.religiousUseLabel}}.</span>
+                  <span v-else-if="trait.type == 'poisons'">When {{trait.prepMethod}}, it {{trait.severityLabel}} and affects the {{trait.bodyPart}}.</span>
+                  <span v-else-if="trait.type == 'medicine'">The {{trait.plantPart}} have {{trait.medicinalUse}} properties, typically used {{trait.form}}.</span>
+                  <span v-else-if="trait.type == 'cosmetic'">The {{trait.plantPart}} are used {{trait.cosmeticUse}} when turned into {{trait.cosmeticForm}}.</span>
+                  <!-- <span v-else-if="trait.type == 'magic'">The {{trait.plantPart}} have {{trait.cosmeticUse}} when turned into {{trait.cosmeticForm}}.</span> -->
+                  <span v-else>When {{trait.prepMethod}},</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <br clear="both">
   </div>
   <script src="vue.js"></script>
+  <script src="data.js"></script>
   <script src="vueSetup.js"></script>
   <script src="js.js"></script>
 </body>

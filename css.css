@@ -1,6 +1,18 @@
+html {
+  background-color: #b1cca8;
+}
+
 ul {
   margin: 0;
   padding-left: 15px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 30px;
+  cursor: pointer;
 }
 
 .trait {
@@ -12,7 +24,92 @@ ul {
 }
 
 .plant {
-  border: 1px solid black;
-  padding: 10px;
-  margin: 5px;
+  /*border: 1px solid black;*/
+  /*padding: 10px;*/
+  /*margin: 5px;*/
 }
+
+#optionsPanel {
+  display: flex;
+}
+
+.col {
+  padding: 10px;
+}
+
+
+/***********************/
+/***** PLANT CARDS *****/
+/***********************/
+
+.plant-card {
+  background-color: rgba(255,255,255,0.6);
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 500px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.plant-col-title {
+ border-bottom: 1px solid black;
+}
+
+.plant-name {
+  font-size: 18px;
+  font-weight: bold;
+  font-style: italic;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.plant-description {
+  display: flex;
+}
+.plant-description > .col {
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  flex-grow: 1;
+  flex-basis: 0;
+  flex-shrink: 1;
+  /*align-content: top;*/
+}
+
+/***********************/
+/**** UTILITY CARDS ****/
+/***********************/
+
+.utility-card {
+  font-size: 14px;
+  margin-top: 1em;
+  border-bottom: 1px dashed black;
+  padding-bottom: 1em;
+}
+
+.utility-card > p {
+  margin: 5px 0;
+}
+
+.utility-card > ul {
+  margin: 5px 0;
+}
+
+.utility-title {
+  font-size: 16px;
+}
+
+/***********************/
+/*** COLOURS & STYLE ***/
+/***********************/
+
+.clr-flowers { color: #ff748c }
+.clr-seeds { color: #ff9800 }
+.clr-roots { color: #b55d0d }
+.clr-plants { color: #10a024 }
+.clr-leaves { color: #91b708 }
+
+.clr-poisons { color: #800080 }
+.clr-cosmetic { color: #f10d9c }
+.clr-medicine { color: #059fff }
+.clr-cooking { color: #ffa500 }
+.clr-dyes { color: #e62a2a }
+.clr-religion { color: #e4b700 }
+.clr-textiles { color: #c777ff }

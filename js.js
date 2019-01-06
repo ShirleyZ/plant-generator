@@ -4,25 +4,38 @@ function genPlant() {
   console.log("=== New plant!");
   var plant = {
     traits: [],
-    appearance: []
+    appearance: [],
+    class: roll(plantClasses),
+    rarity: roll(rarity),
+    habitat: roll(habitat),
   };
+
 
   // Edibility
   plant.eating = roll(edible);
   if (plant.eating == "edible") {
-    plant.traits.push({
-      traitType: "Cooking",
+    var trait = {
+      type: "cooking",
+      typeAdjective: "cooking ingredients",
+      form: roll(ediblePreparation),
       plantPart: roll(plantPart),
       flavour: roll(plantFlavour),
-      prep: roll(plantPreparation)
-    });
+      typeUse: roll(edibleUse),
+    };
+    trait.prepMethod = prepMethod[trait.form];
+    plant.traits.push(trait);
   } else if (plant.eating == "poisonous") {
-    plant.traits.push({
-      traitType: "Poisons",
+    var trait = {
+      type: "poisons",
+      typeAdjective: "poisonous",
       plantPart: roll(plantPart),
       severity: roll(poisonSeverity),
-      method: roll(poisonMethod)
-    })
+      method: roll(poisonMethod),
+      bodyPart: roll(bodyPoisonPart),
+    };
+    trait.prepMethod = prepMethod[trait.method];
+    trait.severityLabel = severityLabel[trait.severity];
+    plant.traits.push(trait);
   }
 
   // Utility
@@ -34,45 +47,66 @@ function genPlant() {
 
   if (plant.utility == "dyes") {
     plant.traits.push({
-      traitType: "Dyes",
+      type: "dyes",
+      typeAdjective: "used in dye-making",
       plantPart: roll(plantPart),
       dyeColour: roll(dyeColours)
     })
   } else if (plant.utility == "cosmetic") {
     plant.traits.push({
-      traitType: "Cosmetic",
+      type: "cosmetic",
+      typeAdjective: "a cosmetic product",
       plantPart: roll(plantPart),
       cosmeticForm: roll(cosmeticForm),
-      cosmeticUse: roll(cosmeticUses)
+      cosmeticUse: roll(cosmeticUses),
     })
   } else if (plant.utility == "medicinal") {
     plant.traits.push({
-      traitType: "Medicine",
+      type: "medicine",
+      typeAdjective: "medicinal",
       plantPart: roll(plantPart),
-      medicinalUse: roll(medicinalUses)
+      medicinalUse: roll(medicinalUses),
+      form: roll(medicinalForm)
     })
   } else if (plant.utility == "religious") {
-    plant.traits.push({
-      traitType: "Religion",
+    var trait = {
+      type: "religion",
+      typeAdjective: "religiously significant",
       plantPart: roll(plantPart),
       religiousUse: roll(reiligiousUses)
-    })
+    }
+    trait.religiousUseLabel = reiligiousUseLabel[trait.religiousUse];
+    plant.traits.push(trait);
   } else if (plant.utility == "magical") {
     plant.traits.push({
-      traitType: "Magic",
+      type: "magic",
+      typeAdjective: "magical",
       plantPart: roll(plantPart),
-      religiousUse: roll(reiligiousUses)
+      religiousUse: roll(reiligiousUses),
+      religiousUseLabel: roll(reiligiousUseLabel)
     })
-  } else if (plant.utility == "textiles/weaving") {
+  } else if (plant.utility == "textiles") {
     plant.traits.push({
-      traitType: "Textiles",
+      type: "textiles",
+      typeAdjective: "used in textiles",
       plantPart: roll(plantPart),
-      textileGrade: roll(textileGrade)
+      textileGrade: roll(textileGrade),
+      textileAdjective: roll(textileAdjective),
+      textileItems: roll(textileItem)
     })
   }
 
 
   // Roll ornamental y/n
+  plant.ornamental = roll([true, false]);
+
+  // Appearance
+  plant.appearance = {
+    flowers: roll(plantFlowers),
+    flowerAction: roll(plantFlowerCharacteristics),
+    leaves: roll(plantLeaves),
+    leafColour: roll(leafColour)
+  }
   // display plant
   console.log(plant);
   vm.plants.unshift(plant);
@@ -83,27 +117,5 @@ function roll (givenArray) {
   // console.log("index: "+index);
   return givenArray[index];
 }
-
-var plantPart = ["leaves", "roots", "flowers", "seeds", "whole plant", "berries"];
-
-var edible = ["edible", "poisonous", "unpalatable"];
-var plantFlavour = ["sweet", "mild", "savoury","bitter","spicy", "aromatic"];
-var plantPreparation = ["ground", "dried", "fresh", "tincture/oils", "pickled", "jam"];
-
-var poisonSeverity = ["sickening","damaging","fatal"];
-var poisonMethod = ["ingested", "contact", "oil", "breathed in"];
-
-var nonPoisonUtility = ["none", "medicinal", "cooking", "dyes", "weaving/textiles", "religious", "cosmetic", "magical"];
-var poisonUtility = ["none", "medicinal", "cosmetic", "religious", "assassination/murder", "hunting/trapping", "battle", "magical"];
-
-var dyeColours = ["light blue", "deep blue", "teal", "light green", "deep green", "sap green", "yellow-green", "yellow", "red", "orange", "pink", "red-orange"];
-var cosmeticForm = ["powder", "paste", "toner", "tonic", "cream"];
-var cosmeticUses = ["moisturising", "colouring", "shimmer", "drawing/lining", "perfume", "hair/beard powder"];
-var medicinalUses = ["healing", "anaesthetic", "anti-nausea", "anti-fungal", "anti-bacterial", "bone/marrow repair", "replenishes blood", "good for skin/healing scars"];
-var reiligiousUses = ["cleansing", "ritual", "offering", "symbolic", "incense", "experiencing"];
-var magicalUses = ["banishing", "blessing", "elemental", "illusionary", "summoning"];
-var textileGrade = ["coarse", "rough", "okay", "soft", "very soft", "light", "wooly", "silky"];
-
-var plantType = ["tree", "shrub", "herbaceous", "grass"];
 
 // Plant styles correlate w/ healing plants ie lobed plants tend not to be poisonous except lookalikes
