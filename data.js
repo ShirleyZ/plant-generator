@@ -42,13 +42,29 @@ var habitat = [
 
 var edible = [
   "edible",
+  "edible",
   "poisonous",
-  "unpalatable"
+  "unpalatable",
+  "unpalatable",
 ];
+
+var unpalatableFlavour = [
+  "extremely bitter",
+  "extremely bitter",
+  "acidic",
+  "bland",
+  "bland",
+  "unpleasant",
+  "unpleasant",
+];
+
 var plantFlavour = [
+  "extremely bitter",
   "sweet",
   "mild",
-  "savoury","bitter","spicy",
+  "savoury",
+  "bitter",
+  "spicy",
   "aromatic"
 ];
 var ediblePreparation = [
@@ -264,14 +280,23 @@ var plantFlowers = [
 
 var plantFlowerCharacteristics = [
   "emit a sweet smell",
+  "emit a sweet smell",
+  "emit a mild scent",
   "emit a mild scent",
   "sway in the wind",
+  "sway in the wind",
+  "flutters when they fall",
   "flutters when they fall",
   "drip nectar",
   "attract butterflies",
   "attract flies",
   "attract moths",
-  "bloom at night",
+  "blooms at night",
+  "bloom in mornings",
+  "bloom in evenings",
+  "blooms at midday",
+  "blooms all day",
+  "blooms all day",
 ];
 
 var plantLeaves = [

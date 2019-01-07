@@ -31,45 +31,10 @@
       </div>
     </div> -->
     <button onclick="genPlant()">Generate</button>
-    <!-- <div class="plant-card">
-      <p class="plant-name">The three pointed trumpet</p>
-      <div class="plant-description">
-        <div class="col">
-          <div class="plant-col-title">Classification</div>
-          <p>Type: Herb</p>
-          <p>Rarity: Common</p>
-          <p>Habitat: Grasslands</p>
-          <p>Appearance:</p>
-          <p>
-            This plant has [small [purple] flowers] that [emit a [sweet] smell]. Its [green] leaves are [oval shaped], [arranged pinnately on a rosette].
-          </p>
-        </div>
-        <div class="col">
-          <div class="plant-col-title">Plant Uses</div>
-          <div class="utility-card">
-            <p class="utility-title">The <span class="clr-flower">[flowers]</span> are <span class="clr-poison">[poisonous]</span>.</p>
-            <p>When [ingested], it has the following effects:</p>
-            <ul>
-              <li>It has a bitter taste.</li>
-              <li>It can cause organ failure in large quantities</li>
-            </ul>
-          </div>
-          <div class="utility-card">
-            <p class="utility-title">The <span class="clr-flower">[flowers]</span> are <span class="clr-cosmetic">[a cosmetic product]</span>.</p>
-            <p>When [powdered], it can be used as blush.</p>
-          </div>
-          <div class="utility-card">
-            <p class="utility-title">The <span class="clr-flower">[leaves]</span> are <span class="clr-medicine">[medicinal]</span>.</p>
-            <p>It can be used as a [paste] to [encourage vomiting]</p>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
     <div id="plantInfo">
       <div v-for="plant in plants" class="plant">
         <div class="plant-card">
-          <p class="plant-name">Plant name</p>
+          <!-- <p class="plant-name">Plant name</p> -->
           <div class="plant-description">
             <div class="col">
               <div class="plant-col-title">Classification</div>
@@ -98,6 +63,7 @@
                   <span v-else-if="trait.type == 'poisons'">When {{trait.prepMethod}}, it {{trait.severityLabel}} and affects the {{trait.bodyPart}}.</span>
                   <span v-else-if="trait.type == 'medicine'">The {{trait.plantPart}} have {{trait.medicinalUse}} properties, typically used {{trait.form}}.</span>
                   <span v-else-if="trait.type == 'cosmetic'">The {{trait.plantPart}} are used {{trait.cosmeticUse}} when turned into {{trait.cosmeticForm}}.</span>
+                  <span v-else-if="trait.type == 'unpalatable'">They taste {{trait.flavour}}, and are not eaten.</span>
                   <!-- <span v-else-if="trait.type == 'magic'">The {{trait.plantPart}} have {{trait.cosmeticUse}} when turned into {{trait.cosmeticForm}}.</span> -->
                   <span v-else>When {{trait.prepMethod}},</span>
                 </p>

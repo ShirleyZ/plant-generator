@@ -15,6 +15,18 @@ button {
   cursor: pointer;
 }
 
+#wrapper {
+  text-align: center;
+}
+
+#plantInfo {
+  display: flex;
+  flex: 1 1 0;
+  flex-wrap: wrap;
+  padding: 0 30px;
+  text-align: left;
+}
+
 .trait {
   border: 1px solid black;
   float: left;
@@ -106,6 +118,7 @@ button {
 .clr-plants { color: #10a024 }
 .clr-leaves { color: #91b708 }
 
+.clr-unpalatable { color: #868686 }
 .clr-poisons { color: #800080 }
 .clr-cosmetic { color: #f10d9c }
 .clr-medicine { color: #059fff }

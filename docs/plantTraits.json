@@ -1,0 +1,23 @@
+
+plant.traits.push({
+  type: "", // The utility type
+  typeAdjective: "", // Descriptive word for this type
+  typeLore: "", // A little fun fact about the plant's place in society
+  form: "", // The physical form it takes
+  prepMethod: "", // The action to take to prepare it
+  plantPart: "", // The plant part it effects
+
+  poisonSeverity: "", // How damaging the plant is,
+  poisonDosage: "",
+  poisonEffect: "", // How the poison effects the body
+
+  dyeColour: "", // The colour of the dye, if any
+  flavour: "", // The flavour, if any
+  cosmeticUse: "", // How the plant is used for cosmetics
+  medicinalUse: "",
+  religiousUse: "",
+  magicalUse: "",
+  textileGrade: "", // Rough/soft
+  textileAdjective: "", // Scratchy/plush/plain
+  textileItem: "", // outer clothing, inner clothing/ropes
+})

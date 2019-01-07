@@ -36,6 +36,14 @@ function genPlant() {
     trait.prepMethod = prepMethod[trait.method];
     trait.severityLabel = severityLabel[trait.severity];
     plant.traits.push(trait);
+  } else if (plant.eating == "unpalatable") {
+    var trait = {
+      type: "unpalatable",
+      typeAdjective: "unpalatable",
+      plantPart: "plants",
+      flavour: roll(unpalatableFlavour)
+    };
+    plant.traits.push(trait);
   }
 
   // Utility
